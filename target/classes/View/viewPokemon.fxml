@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="pokeImageView" fitHeight="349.0" fitWidth="308.0" layoutX="14.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nameLabel" layoutX="20.0" layoutY="24.0" prefHeight="55.0" prefWidth="516.0" style="-fx-alignment: center;" text="Name Pokemon" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="descriptionLabel" layoutX="371.0" layoutY="114.0" prefHeight="349.0" prefWidth="240.0" text="Label" />
+      <Separator layoutX="346.0" layoutY="101.0" orientation="VERTICAL" prefHeight="371.0" prefWidth="1.0" />
+      <Button fx:id="closeButton" layoutX="585.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeButton" text="X" />
+   </children>
+</AnchorPane>

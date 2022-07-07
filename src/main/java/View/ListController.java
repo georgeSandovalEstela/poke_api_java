@@ -2,11 +2,13 @@ package main.java.View;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -23,8 +25,9 @@ public class ListController {
 
     private JSONArray pokemons;
     private List<Pokemons> pokemonsList;
+    private Pokemons pokemon;
     private int page;
-
+    private AnchorPane _anchor;
     public ListController() {
         this.page = 1;
     }
@@ -35,14 +38,32 @@ public class ListController {
     @FXML private GridPane gridPane;
     @FXML private Button previousButton,nextButton;
 
+    private void findPokemonByName(String name){
+        pokemon = null;
+        pokemon = pokemonsList.stream().filter(poke->poke.getName().trim().equals(name.trim())).findFirst().orElse(null);
+
+    }
+
+    private void getNamePokemon(Event event){
+        _anchor = (AnchorPane) event.getSource();
+        System.out.println("NODE ");
+        String pokemonName = ((Label) _anchor.getChildren().get(1)).getText();
+        findPokemonByName(pokemonName);
+    }
 
     private void insertPokemonToGridPane(){
         int countPokemon = 0;
         for (int i = 0; i < gridPane.getColumnConstraints().size(); i++){
             for (int j = 0; j < gridPane.getRowConstraints().size(); j++){
-                AnchorPane _anchor = new AnchorPane();
+                _anchor = new AnchorPane();
                 _anchor.setPrefSize(width,height);
                 _anchor.getChildren().addAll(new ImageView(new Image(Http.POKE_API_IMG+this.pokemonsList.get(countPokemon).getNumber()+".png")), new Label("  "+this.pokemonsList.get(countPokemon).getName()));
+                _anchor.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        getNamePokemon(event);
+                    }
+                });
                 gridPane.add(_anchor,j,i);
                 countPokemon++;
             }

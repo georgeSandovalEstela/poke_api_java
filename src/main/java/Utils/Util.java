@@ -19,4 +19,8 @@ public class Util {
         }
         return pokemons;
     }
+
+    public void showView(String url, Object controller){
+
+    }
 }

@@ -17,7 +17,6 @@ public class main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pokemon");
-        //primaryStage.setScene(new Scene((ScrollPane)loader.load(), 300, 275));
         primaryStage.show();
     }
 
