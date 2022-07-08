@@ -74,11 +74,16 @@ public class ListController {
 
     private void insertPokemonToGridPane(){
         int countPokemon = 0;
-        for (int i = 0; i < gridPane.getColumnConstraints().size(); i++){
-            for (int j = 0; j < gridPane.getRowConstraints().size(); j++){
+        for (int i = 0; i < 5; i++){
+            for (int j = 0; j < 4; j++){
                 _anchor = new AnchorPane();
                 _anchor.setPrefSize(width,height);
-                _anchor.getChildren().addAll(new ImageView(new Image(Http.POKE_API_IMG+this.pokemonsList.get(countPokemon).getNumber()+".png")), new Label("  "+this.pokemonsList.get(countPokemon).getName()));
+                Label nameLabel = new Label("  "+this.pokemonsList.get(countPokemon).getName());
+                nameLabel.setStyle("-fx-translate-x: 20");
+                ImageView imageView = new ImageView(new Image(Http.POKE_API_IMG+this.pokemonsList.get(countPokemon).getNumber()+".png"));
+                imageView.setStyle("-fx-translate-x: 20;-fx-translate-y: 20");
+                _anchor.getChildren().addAll(imageView, nameLabel);
+                _anchor.setStyle("-fx-border-color: black;-fx-border-radius: 20px; -fx-alignment: center;-fx-column-halignment:center");
                 _anchor.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
