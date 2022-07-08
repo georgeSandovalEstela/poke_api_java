@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -41,7 +42,9 @@ public class ListController {
     private static final int width = 120;
     private static final int height = 120;
     @FXML private GridPane gridPane;
-    @FXML private Button previousButton,nextButton;
+    @FXML private Button previousButton,nextButton,searchButton;
+    @FXML private TextField nameTextField;
+
 
     private void findPokemonByName(String name){
         pokemon = null;
@@ -136,6 +139,12 @@ public class ListController {
         if (page>1) page--;
         if(_oldPage!=page) showPokemons();
     }
+
+    @FXML
+    void searchButton(ActionEvent event) {
+
+    }
+
 
     @FXML private void initialize(){
         getPokemons();
