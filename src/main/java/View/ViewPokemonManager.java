@@ -15,17 +15,10 @@ import main.java.domain.Pokemons;
 public class ViewPokemonManager {
     private Pokemons pokemon;
     private ListController listController;
-    @FXML
-    private ImageView pokeImageView;
-
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Label descriptionLabel;
-
-    @FXML
-    private Button closeButton;
+    @FXML private ImageView pokeImageView;
+    @FXML private Label nameLabel;
+    @FXML private Label descriptionLabel;
+    @FXML private Button closeButton;
 
     public ViewPokemonManager(Pokemons pokemon,ListController listController) {
         this.pokemon = pokemon;
@@ -39,7 +32,7 @@ public class ViewPokemonManager {
     }
     private void loadPokemonData(){
         this.pokeImageView.setImage(new Image(Http.POKE_API_IMG+this.pokemon.getNumber()+".png"));
-        this.nameLabel.setText("----------"+this.pokemon.getName()+"----------");
+        this.nameLabel.setText(this.pokemon.getName().trim());
         this.descriptionLabel.setText(pokemon.getDescription());
     }
     @FXML
