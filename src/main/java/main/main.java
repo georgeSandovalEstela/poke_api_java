@@ -16,7 +16,7 @@ public class main extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Pokemon");
+        primaryStage.setTitle("Pokedex");
         primaryStage.show();
     }
 
