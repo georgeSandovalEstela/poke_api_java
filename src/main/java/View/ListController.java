@@ -123,10 +123,6 @@ public class ListController {
         insertPokemonToGridPane();
     }
 
-    private void clickPokemon(Event event){
-
-    }
-
     @FXML
     private void nextButton(ActionEvent event) {
         page++;
@@ -142,7 +138,7 @@ public class ListController {
 
     @FXML
     void searchButton(ActionEvent event) {
-
+        
     }
 
 
