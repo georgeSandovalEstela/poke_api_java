@@ -8,6 +8,10 @@ public class Pokemons {
     private String name;
     private String description;
 
+    public Pokemons(){
+
+    }
+
     public Pokemons(JSONObject _pokemon){
         this.name = _pokemon.getString("name");
         String[] _split = _pokemon.getString("url").split("/");

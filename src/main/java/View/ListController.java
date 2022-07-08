@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -63,9 +65,12 @@ public class ListController {
 
     private void showPokemon(Event event){
         findPokemonByName(getPokemonName(event));
-        Util.showView("View/viewPokemon.fxml", new ViewPokemonManager(this.pokemon,this));
+        showViewPokemon();
     }
 
+    private void showViewPokemon(){
+        Util.showView("View/viewPokemon.fxml", new ViewPokemonManager(this.pokemon,this));
+    }
 
     private void insertPokemonToGridPane(){
         int countPokemon = 0;
@@ -138,7 +143,26 @@ public class ListController {
 
     @FXML
     void searchButton(ActionEvent event) {
-        
+       findPokemonByName(event);
+    }
+
+    private void findPokemonByName(Event event){
+        if(!nameTextField.getText().trim().isEmpty()){
+            this.pokemon = Util.findPokemonByName(nameTextField.getText().trim());
+            if (this.pokemon != null) {
+                showViewPokemon();
+                ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+            }
+            else JOptionPane.showMessageDialog(null, "Pokemon no descubierto.");
+        }
+        else JOptionPane.showMessageDialog(null, "Por favor ingresar nombre");
+    }
+
+    @FXML
+    void nameTextField(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER){
+            findPokemonByName(event);
+        }
     }
 
 

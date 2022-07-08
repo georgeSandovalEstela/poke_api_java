@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.domain.Pokemons;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class Util {
         JSONArray pokemons = null;
         try {
             Unirest.setTimeouts(0, 0);
-            HttpResponse<JsonNode> response = Unirest.get("https://pokeapi.co/api/v2/pokemon-species?limit=20&offset="+String.valueOf(20*page)).asJson();
+            HttpResponse<JsonNode> response = Unirest.get(Http.POKE_API+String.valueOf(20*page)).asJson();
             JSONObject _object = new JSONObject(response.getBody()).getJSONObject("object");
             pokemons = _object.getJSONArray("results");
         }catch (Exception ex){
@@ -32,7 +33,7 @@ public class Util {
         String description = "";
         try {
             Unirest.setTimeouts(0, 0);
-            HttpResponse<JsonNode> response = Unirest.get("https://pokeapi.co/api/v2/pokemon-species/"+numberPokemon+"/").asJson();
+            HttpResponse<JsonNode> response = Unirest.get(Http.POKE_API_POKEMON+numberPokemon+"/").asJson();
             JSONObject _object = new JSONObject(response.getBody()).getJSONObject("object");
             JSONArray text_entries = _object.getJSONArray("flavor_text_entries");
             JSONObject text_entry ;
@@ -48,6 +49,22 @@ public class Util {
         return description;
     }
 
+    public static Pokemons findPokemonByName(String name){
+        Pokemons pokemon = null;
+        try {
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<JsonNode> response = Unirest.get(Http.POKE_API_BY_NAME+name).asJson();
+            JSONObject _object = new JSONObject(response.getBody()).getJSONObject("object");
+            pokemon = new Pokemons();
+            pokemon.setNumber(String.valueOf(_object.getInt("id")));
+            pokemon.setName(_object.getString("name"));
+            pokemon.setDescription(getDescriptionPokemon(pokemon.getNumber()));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            pokemon = null;
+        }
+        return pokemon;
+    }
 
 
     public static void showView(String url, Object controller){
